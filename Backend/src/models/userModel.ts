@@ -4,7 +4,7 @@ import sequelize from '../config/db'; // Database connection
 
 // User interface definition (optional)
 export interface UserAttributes {
-    id?: number;
+    user_id?: number;
     name: string;
     email: string;
     password: string; // hashed password
@@ -13,7 +13,7 @@ export interface UserAttributes {
 
 // Defining User model using Sequelize
 export class User extends Model<UserAttributes> implements UserAttributes {
-    public id!: number;
+    public user_id!: number;
     public name!: string;
     public email!: string;
     public password!: string;
@@ -22,7 +22,7 @@ export class User extends Model<UserAttributes> implements UserAttributes {
 
 // Initialize User model schema
 User.init({
-    id: {
+    user_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true

@@ -1,7 +1,7 @@
 // pages/guest-dashboard.tsx
 import { useState } from 'react';
 import { Box, Typography, TextField, Button, Container } from '@mui/material';
-
+import Navbar from '../components/Navbar';
 const GuestDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [bookDetails, setBookDetails] = useState<any | null>(null);
@@ -25,8 +25,10 @@ const GuestDashboard = () => {
   };
 
   return (
+    <>   
+     <Navbar/>
     <Container maxWidth="sm"  sx={{
-      height: '60vh', // Full height minus AppBar height
+      height: '80vh', // Full height minus AppBar height
       display: 'flex',
       flexDirection: 'column', // Align items vertically
       justifyContent: 'center', // Center content vertically
@@ -72,6 +74,8 @@ const GuestDashboard = () => {
         </Box>
       </Box>
     </Container>
+    </>
+
   );
 };
 

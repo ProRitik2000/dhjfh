@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
 import Transaction, { TransactionAttributes } from '../models/loanModel';
-
+import { seedBooks } from '../Seeders/seedBooks';
 // Create a new transaction (borrow a book)
 export const borrowBook = async (req: Request, res: Response) => {
-    const { book_id, id, borrow_date, due_date }: TransactionAttributes = req.body;
-
+    const { book_id, user_id, borrow_date, due_date }: TransactionAttributes = req.body;
+   // Input validation
+   if (!book_id || !user_id || !borrow_date || !due_date) {
+    return res.status(400).json({ error: 'Missing required fields' });
+}
     try {
         const transaction = await Transaction.create({
             book_id,
-            id,
+            user_id,
             borrow_date,
             due_date,
             status: 'borrowed',
@@ -55,11 +58,11 @@ export const getAllTransactions = async (req: Request, res: Response) => {
 
 // Get transactions for a specific user
 export const getUserTransactions = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { user_id} = req.params;
 
     try {
         const transactions = await Transaction.findAll({
-            where: { id }
+            where: { user_id }
         });
         return res.status(200).json(transactions);
     } catch (error) {

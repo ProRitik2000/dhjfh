@@ -22,12 +22,11 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// Use the auth routes
 // API routes
 app.use('/admin',adminRoute)
 app.use('/api', userRoutes);
 app.use('/api/books', bookRoutes);
-app.use('api/transaction',loanRoutes)
+app.use('/api/loans',loanRoutes)
 // Initialize database and start server
 const initializeDatabase = async () => {
     try {

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link'; // Import Link from Next.js
 import axios from 'axios';
 import Swal from 'sweetalert2'; // Import SweetAlert2
-
+import Navbar from '../components/Navbar';
 interface SignupFormInputs {
   name: string;
   email: string;
@@ -22,7 +22,11 @@ export default function Signup() {
   const onSubmit = async (data: SignupFormInputs) => {
     localStorage.setItem('userData', JSON.stringify(data));
     try {
+      console.log("hello bhai kaisa hai tu............................................");
+      
       const response = await axios.post('http://localhost:5000/api/signup', data);
+      console.log("hello bhai kaisa hai tu......................");//debugging line
+
       console.log("response", response);
 
       // Display success message
@@ -44,7 +48,8 @@ export default function Signup() {
           }
         }, 2000);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error(error);
       Swal.fire({
         title: 'Error',
@@ -55,6 +60,8 @@ export default function Signup() {
   };
 
   return (
+    <>
+    <Navbar/>
     <Container
       maxWidth="sm"
       sx={{
@@ -146,5 +153,6 @@ export default function Signup() {
         </Typography>
       </Box>
     </Container>
+    </>
   );
 }

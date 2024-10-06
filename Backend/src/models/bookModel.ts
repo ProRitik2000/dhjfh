@@ -33,7 +33,8 @@ Book.init({
     book_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull:false,
     },
     title: {
         type: DataTypes.STRING(255),

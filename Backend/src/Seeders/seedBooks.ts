@@ -1,6 +1,6 @@
 import { Book } from '../models/bookModel'; // Adjust the import path as necessary
 
-const seedBooks = async () => {
+export const seedBooks = async () => {
     try {
         // Hardcoded book data with specified titles
         const books = [

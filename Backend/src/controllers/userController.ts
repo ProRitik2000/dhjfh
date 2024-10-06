@@ -41,12 +41,12 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 // Function to update a user
 export const updateUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { user_id} = req.params;
     const { name, email, role } = req.body;
 
     try {
         // Find the user by ID
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(user_id);
         if (!user) {
             return res.status(404).json({ error: 'User not found.' });
         }
@@ -66,11 +66,11 @@ export const updateUser = async (req: Request, res: Response) => {
 
 // Function to delete a user
 export const deleteUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { user_id } = req.params;
 
     try {
         // Find the user by ID and delete
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(user_id);
         if (!user) {
             return res.status(404).json({ error: 'User not found.' });
         }
@@ -108,7 +108,7 @@ export const loginUser = async (req: Request, res: Response) => {
         }
     // Access the dataValues
    
-        const token = jwt.sign({ id: user.id, role: user.role }, 'jwt_secret_key', { expiresIn: '24h' });
+        const token = jwt.sign({ user_id: user.user_id, role: user.role }, 'jwt_secret_key', { expiresIn: '24h' });
         res.status(200).json({ message: 'Login successful.', token, user });
     } catch (error) {
         console.error('Error logging in:', error);

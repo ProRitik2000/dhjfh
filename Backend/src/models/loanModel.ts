@@ -5,7 +5,7 @@ import sequelize from '../config/db'; // Database connection
 export interface TransactionAttributes {
     transaction_id?: number;
     book_id: number;
-    id: number;
+    user_id: number;
     borrow_date: Date;
     due_date: Date;
     return_date?: Date | null; // Nullable for not returned yet
@@ -17,7 +17,7 @@ export interface TransactionAttributes {
 export class Transaction extends Model<TransactionAttributes> implements TransactionAttributes {
     public transaction_id!: number;
     public book_id!: number;
-    public id!: number;
+    public user_id!: number;
     public borrow_date!: Date;
     public due_date!: Date;
     public return_date?: Date | null; // Nullable
@@ -30,7 +30,8 @@ Transaction.init({
     transaction_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull:false,
     },
     book_id: {
         type: DataTypes.INTEGER.UNSIGNED,
@@ -40,12 +41,12 @@ Transaction.init({
             key: 'book_id'
         }
     },
-    id: {
+    user_id: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         references: {
             model: 'users', // Name of the users table
-            key: 'id'
+            key: 'user_id'
         }
     },
     borrow_date: {

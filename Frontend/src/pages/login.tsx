@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-
+import Navbar from '../components/Navbar';
 interface LoginFormInputs {
   email: string;
   password: string;
@@ -18,10 +18,12 @@ export default function Login() {
 
   const onSubmit = async (data: LoginFormInputs) => {
     console.log(data);
-    
+    console.log('i am response.........................')//debug console
+
     try {
       const response = await axios.post('http://localhost:5000/api/login', data); // Call your login API
-      console.log('i am response.........................', response)//debug console
+      console.log('i am response..************.......................', response)//debug console
+
       if (response.status === 200) {
         const user = response.data.user;
         Swal.fire({
@@ -54,6 +56,8 @@ export default function Login() {
   };
 
   return (
+    <>
+    <Navbar/>
     <Container
       maxWidth="sm"
       sx={{
@@ -103,5 +107,6 @@ export default function Login() {
         </Box>
       </Box>
     </Container>
+    </>
   );
 }
